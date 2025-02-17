@@ -1,12 +1,20 @@
 package com.example.zara.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "prices")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,41 +44,10 @@ public class Price {
     @Column(name = "curr")
     private String curr;
 
-    protected Price() {}
-
-    public Price(Long id, Integer brandId, LocalDateTime startDate, LocalDateTime endDate, Integer priceList,
-                 Integer productId, Integer priority, BigDecimal price, String curr) {
-        this.id = id;
-        this.brandId = brandId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.priceList = priceList;
-        this.productId = productId;
-        this.priority = priority;
-        this.price = price;
-        this.curr = curr;
-    }
-
-    public static class Builder {
-        private Long id;
-        private Integer brandId;
-        private LocalDateTime startDate;
-        private LocalDateTime endDate;
-        private Integer priceList;
-        private Integer productId;
-        private Integer priority;
-        private BigDecimal price;
-        private String curr;
-
-        public Builder id(Long id) { this.id = id; return this; }
-        public Builder brandId(Integer brandId) { this.brandId = brandId; return this; }
-        public Builder startDate(LocalDateTime startDate) { this.startDate = startDate; return this; }
-        public Builder endDate(LocalDateTime endDate) { this.endDate = endDate; return this; }
-        public Builder priceList(Integer priceList) { this.priceList = priceList; return this; }
-        public Builder productId(Integer productId) { this.productId = productId; return this; }
-        public Builder priority(Integer priority) { this.priority = priority; return this; }
-        public Builder price(BigDecimal price) { this.price = price; return this; }
-        public Builder curr(String curr) { this.curr = curr; return this; }
-        public Price build() { return new Price(id, brandId, startDate, endDate, priceList, productId, priority, price, curr); }
-    }
+    public Integer getBrandId() { return brandId; }
+    public Integer getProductId() { return productId; }
+    public Integer getPriceList() { return priceList; }
+    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDateTime getEndDate() { return endDate; }
+    public BigDecimal getPrice() { return price; }
 }
